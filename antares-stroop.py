@@ -12,7 +12,6 @@ import numpy as np
 datapath='STROOPrawdata/'
 datafiles=os.listdir(datapath) 
 exportfolder='STROOPcleandata'
-
 try:
     os.mkdir(exportfolder)
 except:
@@ -82,8 +81,9 @@ for datafile in datafiles:
 
     meanRT=main[main["rt"]>0].rt.mean()
     meanACC=float(pd.DataFrame(main["correct"]==1).mean())
-    
-    interference.append([subject,visit, rawInterference, normInterference, correctrawInterference, correctnormInterference,accInterference, accnormInterference, meanACC, meanRT])
+    meanMISSES=float(pd.DataFrame(main["correct"]==-1).mean())
+
+    interference.append([subject,visit, rawInterference, normInterference, correctrawInterference, correctnormInterference,accInterference, accnormInterference, meanACC, meanRT, meanMISSES])
 
 
 outmat={}
@@ -99,7 +99,7 @@ bigmain.to_csv(exportfolder+'/STROOPdata_train.csv', index=False, header=True, n
 
 # %%
 # field names
-fields = ['subject', 'visit', 'rawIntRT', 'normIntRT', 'rawIntRTcor', 'normIntRTcor', 'rawIntACC', 'normIntACC', 'ACC', 'RT']
+fields = ['subject', 'visit', 'rawIntRT', 'normIntRT', 'rawIntRTcor', 'normIntRTcor', 'rawIntACC', 'normIntACC', 'ACC', 'RT', 'Misses']
  
 df = pd.DataFrame(interference)
 df.to_csv(exportfolder+'/STROOPsummarystatistics.csv', header=fields, index=False, na_rep=na_rep)
