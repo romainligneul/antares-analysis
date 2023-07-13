@@ -105,6 +105,5 @@ df = pd.DataFrame(interference)
 df.to_csv(exportfolder+'/STROOPsummarystatistics.csv', header=fields, index=False, na_rep=na_rep)
 
 
-#np.savetxt('STROOPsummarystatistics.csv',interference, delimiter=',')
 
 
