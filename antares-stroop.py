@@ -12,7 +12,12 @@ import numpy as np
 datapath='STROOPrawdata/'
 datafiles=os.listdir(datapath) 
 exportfolder='STROOPcleandata'
-os.mkdir(exportfolder)
+
+try:
+    os.mkdir(exportfolder)
+except:
+    print('folder exists already')
+
 # initialize variables
 bigtrain=pd.DataFrame()
 bigmain=pd.DataFrame()
@@ -86,9 +91,9 @@ outmat['main']=bigmain.to_numpy()
 outmat['train']=bigtrain.to_numpy()
 
 # save big matrices to csv and matlab format
-sio.savemat(exportfolder+'STROOPdata.mat',outmat)
-bigmain.to_csv(exportfolder+'STROOPdata_main.csv', index=False, header=True, na_rep=na_rep)
-bigmain.to_csv(exportfolder+'STROOPdata_train.csv', index=False, header=True, na_rep=na_rep)
+sio.savemat(exportfolder+'/STROOPdata.mat',outmat)
+bigmain.to_csv(exportfolder+'/STROOPdata_main.csv', index=False, header=True, na_rep=na_rep)
+bigmain.to_csv(exportfolder+'/STROOPdata_train.csv', index=False, header=True, na_rep=na_rep)
 
 
 
@@ -97,7 +102,7 @@ bigmain.to_csv(exportfolder+'STROOPdata_train.csv', index=False, header=True, na
 fields = ['subject', 'visit', 'rawIntRT', 'normIntRT', 'rawIntRTcor', 'normIntRTcor', 'rawIntACC', 'normIntACC', 'ACC', 'RT']
  
 df = pd.DataFrame(interference)
-df.to_csv(exportfolder+'STROOPsummarystatistics.csv', header=fields, index=False, na_rep=na_rep)
+df.to_csv(exportfolder+'/STROOPsummarystatistics.csv', header=fields, index=False, na_rep=na_rep)
 
 
 #np.savetxt('STROOPsummarystatistics.csv',interference, delimiter=',')
