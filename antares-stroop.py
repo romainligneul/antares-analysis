@@ -23,7 +23,7 @@ bigmain=pd.DataFrame()
 interference=[]
 
 # simple parameter for STROOP analysis
-prematureRT_cutoff=200 # must 0 or above (misses are coded as -1 in the rt column)
+prematureRT_cutoff=150 # must 0 or above (misses are coded as -1 in the rt column)
 na_rep='' # representation of missing data in the output csvs
 
 # loop over files
